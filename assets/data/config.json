@@ -1,0 +1,18 @@
+{
+    "window" : {
+        "title": "TORMENT",
+        "width" : 1280,
+        "height" : 720,
+        "fullscreen" : false,
+        "vsync" : "true"
+    },
+
+    "keys" : {
+        "MoveLeft" : "A",
+        "MoveRight" : "D",
+        "Jump" : "W",
+        "Attack" : "J",
+        "Dodge" : "K",
+        "Pause" : "Escape"
+    }
+}
