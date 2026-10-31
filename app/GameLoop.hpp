@@ -5,7 +5,7 @@
 #include <memory>
 #include "Input.hpp"
 #include "Scenes.hpp"
-#include "Settings.cpp"
+#include "Settings.hpp"
 
 class GameLoop{
     public:

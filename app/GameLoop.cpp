@@ -1,5 +1,3 @@
-#pragma once
-
 #include "GameLoop.hpp"
 #include <stdexcept>
 #include <string>
@@ -12,5 +10,16 @@ GameLoop::GameLoop(const Settings& settings){
 void GameLoop::run(){
     while(running){
         eventHandler();
+    }
+}
+
+void GameLoop::eventHandler(){
+    SDL_Event event;
+
+    while(SDL_PollEvent(&event)){
+        if( event.type == SDL_EVENT_QUIT){
+            running = false;
+            break;
+        }
     }
 }

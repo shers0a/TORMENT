@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Settings.cpp"
-#include "GameLoop.cpp"
+#include "Settings.hpp"
+#include "GameLoop.hpp"
 
 int main(){
     try {

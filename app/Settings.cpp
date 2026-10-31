@@ -1,5 +1,6 @@
 #include "Settings.hpp"
 #include <fstream>
+#include <stdexcept>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -16,7 +17,7 @@ Settings::Settings(const std::string& path){
     width = win.at("width").get<int>();
     height = win.at("height").get<int>();
     fullscreen = win.at("fullscreen").get<bool>();
-    vsync = win.at("fullscreen").get<bool>();
+    vsync = win.at("vsync").get<bool>();
 
     if(width <= 0 ||  height <= 0)
         throw std::runtime_error("Invalid dimension values in " + path);
@@ -28,7 +29,7 @@ Settings::Settings(const std::string& path){
         if( sc == SDL_SCANCODE_UNKNOWN )
             throw std::runtime_error("Unknown key " + name);
         
-            key[action] = sc;
+        keys[action] = sc;
     }
 }
 
