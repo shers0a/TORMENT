@@ -61,10 +61,10 @@ void Stats::increaseMaxHp(const double maxhp_adder){
 
 std::ostream& operator<<(std::ostream& os, const Stats& stats){
     os << "Stats: " << "\n" << "MAX HP: " << stats.getMaxHp() << "\n";
-    os << "CURRENT HP: " << stats.getHp() << "\n";
-    os << "DEF: " << stats.getDef() << "\n";
-    os << "DMG: " << stats.getDamage() << "\n";
-    os << "SPD: " << stats.getSpd();
+    os << "CURRENT HP: " << stats.hp << "\n";
+    os << "DEF: " << stats.def << "\n";
+    os << "DMG: " << stats.damage << "\n";
+    os << "SPD: " << stats.spd;
 
     return os;
 }

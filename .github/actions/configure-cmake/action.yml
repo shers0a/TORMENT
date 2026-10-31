@@ -17,15 +17,28 @@ runs:
   using: "composite"
   steps:
     # Uncomment when using external dependencies, so they will be cached
-    # - name: Cache deps
-    #   # renovate: datasource=github-tags depName=actions/cache versioning=loose
-    #   uses: actions/cache@v6.1.0
-    #   id: cache-deps
-    #   # make the key depend on the dependency version
-    #   with:
-    #     path: |
-    #       ${{ env.BUILD_DIR }}/_deps
-    #     key: ${{ inputs.cache_key }}-${{ matrix.cmake_generator }}-${{ matrix.os }}-${{ matrix.cxx }}-${{ matrix.asan_name }}-${{ env.BUILD_TYPE }}
+    - name: Cache deps
+      # renovate: datasource=github-tags depName=actions/cache versioning=loose
+      uses: actions/cache@v6.1.0
+      id: cache-deps
+      # make the key depend on the dependency version
+      with:
+        path: |
+          ${{ env.BUILD_DIR }}/_deps
+        key: ${{ inputs.cache_key }}-${{ matrix.cmake_generator }}-${{ matrix.os }}-${{ matrix.cxx }}-${{ matrix.asan_name }}-${{ env.BUILD_TYPE }}
+
+    # SDL3 is built from source (FetchContent) and needs the video/audio dev headers on Linux
+    # https://wiki.libsdl.org/SDL3/README-linux#build-dependencies
+    - name: Install SDL3 dependencies (Linux)
+      shell: bash
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get install --no-install-recommends \
+          libasound2-dev libpulse-dev libpipewire-0.3-dev \
+          libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev \
+          libxkbcommon-dev libwayland-dev wayland-protocols libdecor-0-dev \
+          libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libvulkan-dev \
+          libdbus-1-dev libibus-1.0-dev libudev-dev libusb-1.0-0-dev liburing-dev
 
     # NOTE: GH Actions does not allow updating the cache yet
     # Using the workaround found here: https://github.com/actions/cache/issues/171
