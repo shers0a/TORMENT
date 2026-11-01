@@ -1,5 +1,6 @@
 #include "Attack.hpp"
 #include <stdexcept>
+
 Attack::Attack(const std::string& name, const double damage, const double cooldown, const int phase, const double beforeAtt) :
         name(name), damage(damage), cooldown(cooldown), remainingCooldown(0), phase(phase), beforeAtt(beforeAtt){}
         
