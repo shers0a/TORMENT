@@ -76,15 +76,12 @@ FetchContent_MakeAvailable(SDL3 nlohmann_json)
 add_library(${MAIN_LIBRARY_NAME} STATIC)
 
 # NOTE: update EXECUTABLE_NAME in .github/workflows/cmake.yml when changing name here
+# app/GameLoop.cpp and app/Settings.cpp (the SDL window) are left out until the fight runs in a window
 add_executable(${MAIN_EXECUTABLE_NAME}
     app/main.cpp
-    app/GameLoop.cpp
-    app/Settings.cpp
 )
 target_sources(${MAIN_LIBRARY_NAME}
     PRIVATE
-        src/Example.cpp
-        src/internal/Detail.cpp
         src/Stats.cpp
         src/Attack.cpp
         src/Boss.cpp

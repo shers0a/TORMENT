@@ -1,4 +1,18 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# TORMENT
+
+TORMENT is a 2D **boss-rush** game inspired by Dante's **Inferno**, in which the main character decides
+to conquer Hell out of sheer... boredom. Through them, you get to set out on a one-of-a-kind journey:
+a descent through the circles of Hell, each one guarded by a single boss
+(the first of them is **Minos**, the judge of the damned).
+
+There are no regular enemies and no grinding. Every fight comes down to **reading, dodging and punishing**.
+Each boss attack is **telegraphed**: you get a short warning before it lands.
+Dodge at the right moment and your invulnerability frames carry you through the hit.
+After every attack the boss is left open for a brief **vulnerability window**, and that is your only chance
+to strike back. Once a boss loses enough health, it enters a **second phase** with a new set of attacks.
+
+The game focuses on **timing, pattern recognition and patience**. Bosses pick their attacks at random from
+the ones available, so no two fights play out the same, but every attack can be learned and countered.
 
 ### Folosiți template-ul corespunzător grupei voastre!
 

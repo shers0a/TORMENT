@@ -9,7 +9,7 @@
 
 class Boss{
     public:
-        Boss(const std::string& name, const std::vector<Attack>&  attacks, const Stats& stats);
+        Boss(const std::string& name, const std::vector<Attack>&  attacks, const Stats& stats, double phase2Constant, std::mt19937::result_type seed);
         
         Boss(const Boss& _boss);
 
@@ -19,11 +19,9 @@ class Boss{
 
         friend std::ostream& operator<<(std::ostream& os, const Boss& boss);
 
-        std::string getName() const;
-
-        void chooseAttack();
+        const Attack* chooseAttack();
         void update(double dt);
-        bool currentHp() const;
+        bool isAlive() const; 
         void takeDamage(double x);
         int currentPhase() const;
 
@@ -32,4 +30,5 @@ class Boss{
         std::vector<Attack> attacks;
         Stats stats;
         std::mt19937 gen;
+        double phase2Constant;
 };

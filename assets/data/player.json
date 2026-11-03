@@ -1,0 +1,14 @@
+{
+    "name": "The Bored One",
+
+    "stats": {
+        "max_hp": 100,
+        "hp": 100,
+        "damage": 25,
+        "def": 5,
+        "spd": 1
+    },
+
+    "iframe_cooldown": 0.3,
+    "dodge_cooldown": 1.0
+}

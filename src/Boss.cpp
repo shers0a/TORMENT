@@ -1,13 +1,16 @@
 #include "Boss.hpp"
+#include <stdexcept>
 
-Boss::Boss(const std::string& name, const std::vector<Attack>& attacks, const Stats& stats):
-        name(name), attacks(attacks), stats(stats), gen(std::random_device{}()){
-
+Boss::Boss(const std::string& name, const std::vector<Attack>& attacks, const Stats& stats, const double phase2Constant, std::mt19937::result_type seed):
+        name(name), attacks(attacks), stats(stats), gen(seed), phase2Constant(phase2Constant){
+            if(phase2Constant > 1.0 || phase2Constant < 0.0 ){
+                throw std::invalid_argument("The phase transitioning constant must be in the interval [0,1].");
+            }
         }
 
 
 Boss::Boss(const Boss& _boss) : 
-    name(_boss.name), attacks(_boss.attacks), stats(_boss.stats), gen(std::random_device{}()){}
+    name(_boss.name), attacks(_boss.attacks), stats(_boss.stats), gen(_boss.gen), phase2Constant(_boss.phase2Constant){}
 
 Boss::~Boss() = default;
 
@@ -19,7 +22,9 @@ Boss& Boss::operator=(const Boss& _boss){
     name = _boss.name;
     attacks = _boss.attacks;
     stats = _boss.stats;
-
+    gen = _boss.gen;
+    phase2Constant = _boss.phase2Constant;
+    
     return *this;
 }
 
@@ -35,11 +40,7 @@ std::ostream& operator<<(std::ostream& os, const Boss& boss){
     return os;
 }
 
-std::string Boss::getName() const{
-    return ( this -> name );
-}
-
-bool Boss::currentHp() const{
+bool Boss::isAlive() const{
     if(stats.getHp() > 0 ){
         return true;
     }
@@ -48,7 +49,7 @@ bool Boss::currentHp() const{
 }
 
 int Boss::currentPhase() const{
-    if(stats.getHp() < stats.getMaxHp() / 2 ){
+    if(stats.getHp() < stats.getMaxHp() * phase2Constant ){
         return 2;
     }
 
@@ -59,7 +60,7 @@ void Boss::takeDamage(double x){
     stats.damageTaken(x);
 }
 
-void Boss::chooseAttack(){
+const Attack* Boss::chooseAttack(){
     std::vector<std::size_t> positions;
 
     int current_phase = currentPhase();
@@ -71,12 +72,20 @@ void Boss::chooseAttack(){
     }
     
     if(positions.empty()){
-        return; //no attacks available
+        return nullptr; //no attacks available
     }
 
     std::uniform_int_distribution<std::size_t> choose_attack_randomizer(0, positions.size() - 1);
 
     std::size_t chosen_attack = choose_attack_randomizer(gen);
 
-   attacks[positions[chosen_attack]].use();
+    attacks[positions[chosen_attack]].use();
+    
+    return &attacks[positions[chosen_attack]];
+}
+
+void Boss::update(double dt){
+    for( auto& attack : attacks ){
+        attack.update(dt);
+    }
 }

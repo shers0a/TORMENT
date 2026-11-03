@@ -9,7 +9,6 @@ class Attack{
 
         friend std::ostream& operator<<(std::ostream& os, const Attack& attack);
     
-        std::string getName() const;
         double getDamage() const;
         double getBeforeAtt() const;
 

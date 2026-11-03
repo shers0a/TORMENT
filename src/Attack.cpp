@@ -15,10 +15,6 @@ std::ostream& operator<<(std::ostream& os, const Attack& attack){
     return os;
 }
 
-std::string Attack::getName() const{
-    return ( this -> name );
-}
-
 double Attack::getDamage() const{
     return ( this -> damage );
 }
