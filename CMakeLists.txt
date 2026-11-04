@@ -37,14 +37,17 @@ set(FETCHCONTENT_UPDATES_DISCONNECTED ON CACHE INTERNAL "Override update strateg
 # NOTE: Also update env vars used for caching in
 #     - .github/actions/configure-cmake/action.yml
 #     - .github/workflows/cmake.yml
-FetchContent_Declare(
-    SDL3
-    SYSTEM         # keeps ext libs out of static code analysis
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG        release-3.4.18 # 829a65d @ 2026-10-02
-    GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
-    GIT_PROGRESS   ON
-)
+# SDL3 is off for Tema 1: the app is a console fight and does not use it.
+# It comes back with the SDL window (app/GameLoop.cpp, app/Settings.cpp).
+# NOTE: SDL3 does not configure with GCC on macOS (needs -fobjc-arc, Clang only).
+# FetchContent_Declare(
+#     SDL3
+#     SYSTEM         # keeps ext libs out of static code analysis
+#     GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+#     GIT_TAG        release-3.4.18 # 829a65d @ 2026-10-02
+#     GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
+#     GIT_PROGRESS   ON
+# )
 
 FetchContent_Declare(
     nlohmann_json
@@ -56,11 +59,11 @@ FetchContent_Declare(
 )
 
 # SDL always static: no SDL3.dll/.so/.dylib to copy next to the executable, whatever BUILD_SHARED_LIBS is
-set(SDL_SHARED OFF)
-set(SDL_STATIC ON)
-set(SDL_TEST_LIBRARY OFF)
+# set(SDL_SHARED OFF)
+# set(SDL_STATIC ON)
+# set(SDL_TEST_LIBRARY OFF)
 
-FetchContent_MakeAvailable(SDL3 nlohmann_json)
+FetchContent_MakeAvailable(nlohmann_json)
 
 ###############################################################################
 
@@ -123,8 +126,9 @@ target_include_directories(${MAIN_LIBRARY_NAME} SYSTEM PRIVATE
 
 target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE ${MAIN_LIBRARY_NAME})
 
-# only app/ uses SDL and json for now; move them to the library when src/ or include/ needs them
-target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE SDL3::SDL3 nlohmann_json::nlohmann_json)
+# only app/ uses json for now; move it to the library when src/ or include/ needs it
+# add SDL3::SDL3 back here together with the SDL window
+target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE nlohmann_json::nlohmann_json)
 
 # target_link_directories(${MAIN_EXECUTABLE_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
 # target_link_libraries(${MAIN_EXECUTABLE_NAME} <SomeLib>)
