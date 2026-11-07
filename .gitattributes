@@ -1,1 +1,6 @@
 ext/** linguist-vendored
+
+# template infrastructure (CMake helpers and CI scripts), not project code;
+# excluded from GitHub language stats with the lab teacher's approval
+cmake/** linguist-vendored
+scripts/** linguist-vendored
