@@ -13,7 +13,7 @@ to strike back. Once a boss loses enough health, it enters a **second phase** wi
 
 The game focuses on **timing, pattern recognition and patience**. Bosses pick their attacks at random from
 the ones available, so no two fights play out the same, but every attack can be learned and countered.
-
+ 
 ### Folosiți template-ul corespunzător grupei voastre!
 
 | Laborant  | Link template                                |
