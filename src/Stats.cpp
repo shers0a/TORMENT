@@ -14,8 +14,6 @@ double Stats::getMaxHp() const{
     return this -> maxHp;
 }
 
-/**************************/
-
 void Stats::damageTaken(const double damage_taken){
     //formula damage 
     double damage_to_be_taken = damage_taken - def;
