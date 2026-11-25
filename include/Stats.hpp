@@ -5,7 +5,8 @@ class Stats{
     public:
         Stats(double maxHp, double hp, double damage, double def, double spd);
 
-        friend std::ostream& operator<<(std::ostream& os, const Stats& stats);
+        friend std::ostream& operator<<(std::ostream& os, 
+            const Stats& stats);
         
         //getteri
 
