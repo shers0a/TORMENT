@@ -12,7 +12,8 @@ void Fight::update(double dt){
     player.update(dt);
     boss.update(dt);
 
-    if(attack != nullptr){
+    //attack = nullptr cand nu este in desfasurare niciun atac
+    if(attack != nullptr){ //deci aici e un attack in desfasurare
         remaining_beforeAtt -= dt;
         
         if(remaining_beforeAtt < 0){
@@ -22,15 +23,15 @@ void Fight::update(double dt){
         if( remaining_beforeAtt == 0 ){
             if(!player.isInvulnerable()){
                 player.takeDamage(attack -> getDamage());
-            }
+            } //daca playerul nu e invulnerabil atunci isi ia damage
 
             remaining_vulnerability_window = vulnerability_window;
             // dupa ce ataca e vulnerabil asa ca se deschide fereastra de timp de in care e vulnerabil
             
-            attack = nullptr;
+            attack = nullptr; //nu mai e niciun attack in desfasurare
         }
     }
-    else if(remaining_vulnerability_window > 0){
+    else if(remaining_vulnerability_window > 0){ //daca bossul e vulnerabil atunci nu mai ataca
         remaining_vulnerability_window -= dt;
 
         if(remaining_vulnerability_window < 0){
@@ -38,7 +39,7 @@ void Fight::update(double dt){
         }
     }
     else{
-        attack = boss.chooseAttack();
+        attack = boss.chooseAttack(); // deci attack == nullptr astfel ca se alege un atac
 
         //basically daca nu e niciun atac disponibil attack ramane nullptr
         if(attack != nullptr){

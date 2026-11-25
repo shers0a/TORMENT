@@ -8,11 +8,13 @@ Boss::Boss(const std::string& name, const std::vector<Attack>& attacks, const St
             }
         }
 
-
+//copy constructor
 Boss::Boss(const Boss& _boss) : 
     name(_boss.name), attacks(_boss.attacks), stats(_boss.stats), gen(_boss.gen), phase2Constant(_boss.phase2Constant){}
 
 Boss::~Boss() = default;
+
+//operator=
 
 Boss& Boss::operator=(const Boss& _boss){
     if( this == &_boss){
@@ -40,6 +42,8 @@ std::ostream& operator<<(std::ostream& os, const Boss& boss){
     return os;
 }
 
+
+//oare?
 bool Boss::isAlive() const{
     if(stats.getHp() > 0 ){
         return true;
@@ -61,7 +65,7 @@ void Boss::takeDamage(double x){
 }
 
 const Attack* Boss::chooseAttack(){
-    std::vector<std::size_t> positions;
+    std::vector<std::size_t> positions; //pozitiile atacurilor
 
     int current_phase = currentPhase();
 
@@ -75,9 +79,9 @@ const Attack* Boss::chooseAttack(){
         return nullptr; //no attacks available
     }
 
-    std::uniform_int_distribution<std::size_t> choose_attack_randomizer(0, positions.size() - 1);
+    std::uniform_int_distribution<std::size_t> choose_attack_randomizer(0, positions.size() - 1); //da un numar random din interval
 
-    std::size_t chosen_attack = choose_attack_randomizer(gen);
+    std::size_t chosen_attack = choose_attack_randomizer(gen); // produce numarul cerut, iar uniform int distr il face in intervalul respectiv
 
     attacks[positions[chosen_attack]].use();
     

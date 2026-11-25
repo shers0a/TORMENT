@@ -17,6 +17,7 @@ double Stats::getMaxHp() const{
 /**************************/
 
 void Stats::damageTaken(const double damage_taken){
+    //formula damage 
     double damage_to_be_taken = damage_taken - def;
     if(damage_to_be_taken < 0){
         damage_to_be_taken = 0;
@@ -30,6 +31,8 @@ void Stats::damageTaken(const double damage_taken){
 
     this -> hp -= damage_to_be_taken;
 }
+
+//operator<<
 
 std::ostream& operator<<(std::ostream& os, const Stats& stats){
     os << "Stats: " << "\n" << "MAX HP: " << stats.getMaxHp() << "\n";

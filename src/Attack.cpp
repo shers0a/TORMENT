@@ -52,5 +52,6 @@ void Attack::update(double dt){
         return;
     }
 
+    //scade din cooldown cu unitatea de timp
     this -> remainingCooldown -= dt;
 }

@@ -27,8 +27,8 @@ class Boss{
 
     private:
         std::string name;
-        std::vector<Attack> attacks;
+        std::vector<Attack> attacks; //toate atacurile bossului
         Stats stats;
-        std::mt19937 gen;
-        double phase2Constant;
+        std::mt19937 gen; //generator 
+        double phase2Constant; // de lace procentaj incepe phase2 ul bossului
 };
